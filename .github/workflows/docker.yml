@@ -23,5 +23,5 @@ jobs:
       run: |
         docker buildx create --use
         docker buildx inspect --bootstrap
-        docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{ github.dockerimage}}:latest --push .
         docker push ghcr.io/${{github.dockerimage}}:latest
+        docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/rbett.va/REPOSITORY:latest --push .
