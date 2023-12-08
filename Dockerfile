@@ -1,23 +1,10 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14
+FROM ubuntu:20.04
 
-# Set the working directory to /app
-WORKDIR /app
+RUN apt-get update && \
+    apt-get install -y \
+    nginx \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+EXPOSE 80
 
-# Install app dependencies
-RUN npm install
-
-# Copy the current directory contents to the container at /app
-COPY . .
-
-# Make port 3000 available to the world outside this container
-EXPOSE 3000
-
-# Define environment variable
-ENV NODE_ENV=dev
-
-# Run app.js when the container launches
-CMD ["node", "app.js"]
+CMD ["nginx", "-g", "daemon off;"]
